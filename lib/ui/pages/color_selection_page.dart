@@ -18,17 +18,31 @@ class ColorSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Color palette app'),
-          actions: [
-            IconButton(onPressed: showDialog, icon: Icon(Icons.info_outline))
-          ],
+      appBar: AppBar(
+        title: const Text('Color palette app'),
+        actions: [
+          IconButton(
+            onPressed: showDialog,
+            icon: const Icon(Icons.info_outline),
+          )
+        ],
+      ),
+      // https://colorhunt.co/
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(children: [
+            ColorPalette(
+              baseColor: "FF0000",
+              callback: showColor,
+            ),
+            ColorPalette(
+              baseColor: "00FF00",
+              callback: showColor,
+            ),
+          ]),
         ),
-        // https://colorhunt.co/
-        body: (const Center(
-          child: Text(
-              "SingleChildScrollView -> Column -> [ColorPalette, ColorPalette] "),
-        )));
+      ),
+    );
   }
 
   // está es la función que será llamada con cada click a un ColorPalette
@@ -36,7 +50,7 @@ class ColorSelectionPage extends StatelessWidget {
     Clipboard.setData(ClipboardData(text: value));
     Get.snackbar(
       'Color palette',
-      'Valor copiado',
+      'Valor copiado: $value',
       backgroundColor: ColorUtils.FromHex(value),
       snackPosition: SnackPosition.BOTTOM,
     );

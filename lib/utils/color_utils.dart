@@ -10,6 +10,7 @@ class ColorUtils {
     for (int i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
     }
+
     strengths.forEach((strength) {
       final double ds = 0.5 - strength;
       swatch[(strength * 1000).round()] = Color.fromRGBO(
